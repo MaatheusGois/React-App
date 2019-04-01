@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { addComment } from '../redux/ActionCreators';
+// import { addComment } from '../redux/ActionCreators';
 import { addComment, fetchDishes } from '../redux/ActionCreators';
 
 
@@ -36,9 +36,6 @@ const mapDispatchToProps = dispatch => ({
 class Main extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
     }
 
     componentDidMount() {
@@ -68,6 +65,23 @@ class Main extends Component {
                 />
             );
         };
+
+        return (
+            <div>
+                <Header />
+                <div>
+                    <Switch>
+                        <Route path='/home' component={HomePage} />
+                        <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders} />} />} />
+                    <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes} />} />
+                        <Route path='/menu/:dishId' component={DishWithId} />
+                        <Route exact path='/contactus' component={Contact} />} />
+                    <Redirect to="/home" />
+                    </Switch>
+                </div>
+                <Footer />
+            </div>
+        );
     }
 
 
